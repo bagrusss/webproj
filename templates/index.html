@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block main %}
+		<div class="row-fluid" id="qmenus">
+			<div >
+			  <a href="/?a=pop" class="btn btn-inverse btn-large" id="topButton">Popular</a>
+			  <spacer height="0" width="100px" type="horizontal"></spacer>
+			  <a href="/?a=new" class="btn btn-inverse btn-large" id="newButton">New</a>
+			</div>
+			<h1 class="custom_title" id="header">{{title}}</h1>
+		</div>
+				{% for q in questions %}
+				<div class="question row-fluid">
+					<div class="span2" align="middle" style="margin-left:3px">
+						<img class="question_img" src="http://lorempixel.com/140/140/" style="margin-bottom:5px">
+						<span>{{q.author}}</span>
+						<div class="vote_bar" >
+							   <span>
+  								<button class="btn btn-mini btn-danger vote_down" type="button"><i class="icon-minus icon-white"></i></button>
+								<nobr>{{q.rating}}</nobr>
+								<button class="btn btn-mini btn-success vote_up" type="button"><i class="icon-plus icon-white"></i></button>
+							   </span> 
+						</div>
+					</div>
+					<div class="span9">
+						<h5 class="question_title"><a href="/question?q={{q.id}}">{{q.title}}</a></h5>
+						<p class="ordinary_text">{{q.text}}</p>
+						
+						<span class="qtags">
+						   Tags: 
+						   <a href="?a=tag&tag=cats">cats</a>
+						   <a href="?a=tag&tag=wash">wash</a>
+						   <a href="?a=tag&tag=clean">clean</a>
+						</span> <span class="qdate">{{q.created}}</span>
+					</div>
+				</div>
+				{% endfor %}
+	<div class="pagination" id="pager">
+  		<ul  align="left">
+   			 <li><a href="#prev">Prev</a></li>
+   			 <li  class="disabled"><a href="#1">1</a></li>
+   			 <li><a href="#2">2</a></li>
+  			 <li><a href="#3">3</a></li>
+   			 <li class="disabled"><a href="#..." >...</a></li>
+   			 <li><a href="#5">5</a></li>
+   			 <li><a href="#next">Next</a></li>
+ 		</ul>
+	</div>
+{% endblock %}

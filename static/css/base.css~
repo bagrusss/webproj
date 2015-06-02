@@ -1,0 +1,212 @@
+@font-face {
+    font-family: gothic !important; 
+     src:  url('../fonts/gothic.ttf'); 
+}
+
+@font-face {
+    font-family: cheap !important; 
+    src:  url('../fonts/cheap.ttf');
+}
+
+@font-face {
+    font-family: desda !important; 
+    src: url('../fonts/desdac.ttf'); 
+}
+
+@font-face {
+    font-family: quake !important; 
+    src: url('../fonts/quake.ttf');
+}
+
+@font-face {
+    font-family:  goodvibespro !important; 
+    src: url('../fonts/goodvibespro.ttf'); 
+}
+
+@font-face {
+    font-family:  unreal !important; 
+    src: url('../fonts/unreal.ttf'); 
+}
+
+
+#left{
+	
+}
+
+#right{
+	float:right; 
+}
+
+#main_container{
+	height:100%;
+	position:relative;
+}
+
+body{
+	background:#EFEEEE;
+	min-width: 769px;
+}
+
+#copyright{
+	font-family: quake;
+	font-size:medium;
+	position:absolute; 
+	bottom:0;
+}
+
+#ask_btn{
+	float:left;
+	margin-left:10%
+}
+
+#sign_in_btn{
+	float:right; 
+	margin-left:10px;
+}
+
+#sign_up_btn{
+	float:right;
+	margin-left:5px;
+}
+
+#head{
+	margin-top:5px;
+}
+
+#sign{
+ 	visibility:visible; 
+}
+
+.form-control{
+	min-width:280px;
+}
+
+.qtags{
+	float:left;
+}
+
+
+.answercheckbox{
+	visibility:hidden;
+}
+
+.qdate{
+	float:right;
+	font-weight:bolder;
+}
+
+.answer{
+	max-width:98%;
+	border: 1px double gray;
+	border-radius: 15px;
+	margin-top: 1%;
+	margin-left: 2%;
+}
+
+.vote_bar{
+	margin-bottom: 3px;
+	border-radius: 15px;
+}
+
+.ordinary_text{
+	font-family:'Good Vibes Pro', goodvibespro;
+	font-size: x-large;
+}
+
+.answer_text{
+	margin-top:15px;
+	min-height:105px; 
+}
+
+.question_title{
+	font-family: quake;
+	font-size: 130%;
+	margin-bottom:3%;
+}
+
+.question_text{
+	min-height:10%; 
+}
+
+
+.question{
+	border: 1px double gray;
+	border-radius: 5px;
+	margin-top: 12px;
+	width:100%;
+}
+.question_img {
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+}
+
+.question h5{
+	margin-top: 5px;
+}
+
+#qmenus{
+	text-align: center;
+	margin-top:1%;
+}
+
+#topButton{
+	margin-right:2%;
+}
+
+#newButton{
+	margin-right:2%;
+}
+
+.custom_title{
+	font-family: gothic;
+	font-size: 250%;
+	text-align: center;
+}
+
+#header {
+	align:middle;
+	font-size: 400%;
+	margin-bottom:2%;
+	margin-top:2%;
+}
+
+#question_textarea{
+	max-width:206px;
+	min-width:206px;  
+	max-height:250px;
+}
+
+.vote_up{
+	/*max-width:10px;*/
+}
+
+.vote_down{
+	/*max-width:10px;*/
+}
+
+.tags{
+	font-family: CheapPizza, cheap;
+}
+
+/* он же input*/
+.edittext{
+
+}
+
+
+.authors{
+	font-family: DesdaC, desda;
+	font-size: large;
+}
+
+p{
+	margin-bottom:5px;
+}
+#pager {
+	margin-top:30px;
+}
+
+#title_home {
+	margin-left:5px;
+}
