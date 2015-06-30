@@ -75,13 +75,13 @@ def question(request):
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
-	return render(request, 'question.html', {'question':question, 'tags':tags, 'poptags':poptags})
+	return render(request, 'question.html',{'question':question, 'tags':tags, 'poptags':poptags})
 
 
 def addquestion(request):
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
-	return render(request, 'addquestion.html', {'poptags':poptags, 'poptags':poptags})
+	return render(request, 'addquestion.html',{'poptags':poptags, 'poptags':poptags})
 
 def params(request):
 	if request.method=='POST':

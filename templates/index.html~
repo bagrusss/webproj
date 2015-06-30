@@ -28,7 +28,7 @@
 						<span class="qtags">
 						   Tags: 
 						   {% for t in q.tag_set.all %}
-						   <a href="?a=tag&tag={{t}}">{{t}}</a>
+						   <a href="?a=tag&tag=">{{t}}</a>
 						   {% endfor %}
 						</span> <span class="qdate">{{q.created}}</span>
 					</div>

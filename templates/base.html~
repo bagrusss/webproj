@@ -63,7 +63,7 @@
 			<h3 class="custom_title">Popular authors</h3>
 			<ul class="authors">
 			   {% for author in popauthors %}
-				<a href="/"><li>{{author.user.username}}</li></a>
+				<a href="/"><li>{{author}}</li></a>
 			   {% endfor %}	
 				
 			</ul>
