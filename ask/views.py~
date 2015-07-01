@@ -8,38 +8,58 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from ask.models import *
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 
 import  datetime
 
+authors=7
+
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
 
+actions=frozenset({'new','pop','tag'})
+
 def index(request):
 	a=request.GET.get('a','new')
+	if a not in actions:
+	   a='new'
+	questions_list=0;
 	if a=='new':
-           questions = Question.objects.new()[:20]
+           questions_list = Question.objects.new()
 	   title='New Questions'
 	if a=='pop':
-	   questions =  Question.objects.popular()[0:20]
+	   questions_list =  Question.objects.popular()
 	   title='Popular Questions'
 	if a=='tag':
 	   tag=request.GET.get('tag','java')
 	   title = 'Questions for tag "'+tag+'"'
-	   questions =  Question.objects.get_questions_by_tag(tag)[0:20]
+	   questions_list = Question.objects.get_questions_by_tag(tag)
+	page = request.GET.get('page',1)
+	paginator=Paginator(questions_list, 2)
+	try:
+	   questions=paginator.page(page)
+	except PageNotAnInteger:
+	   questions=paginator.page(1)
+	except EmptyPage:
+	   raise Http404 #questions=paginator.page(paginator.num_pages)
+	
         poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
-        return render(request, 'index.html', {'questions':questions, 'title':title, 'poptags':poptags, 'popauthors':popauthors})
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+        return render(request, 'index.html', {	'questions':questions, 
+						'title':title, 
+						'poptags':poptags, 
+						'popauthors':popauthors,
+						'a':a})
 
 def signup(request):
 	poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	return render(request, 'signup.html', {'poptags':poptags, 'popauthors':popauthors})
 
 def signin(request):
 	poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	if request.POST:
 	   redirect = "/"
 	   username=request.POST['username']
@@ -52,13 +72,12 @@ def signin(request):
             return render(request, 'signin.html', {
                 'poptags': poptags,
                 'username': username,
-                'password': password,
                 'error': 1,
                 'redirect': redirect
             })
 	return render(request, 'signin.html', {'poptags':poptags, 'popauthors':popauthors})
 
-def logout_v(request):
+def logout_v(request, page=1):
 	logout(request)
 	return HttpResponseRedirect("/")
 
@@ -72,16 +91,31 @@ def question(request):
 	except TypeError:
 	   q_id=1
 	question = Question.objects.get(id=q_id)
+	answers_list=question.answer_set.all()
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
-	return render(request, 'question.html',{'question':question, 'tags':tags, 'poptags':poptags})
-
+	page = request.GET.get('page', 1)
+	paginator=Paginator(answers_list, 2)
+	answers=0
+	try:
+	   answers=paginator.page(page)
+	except PageNotAnInteger:
+	   answers=paginator.page(1)
+	except EmptyPage:
+	   raise Http404 #answers=paginator.page(paginator.num_pages)
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+	return render(request, 'question.html', {'question':question, 
+						 'tags':tags, 
+						 'poptags':poptags, 
+						 'answers':answers, 
+						 'popauthors':popauthors, 
+						 'page':page,
+						 'q':q_id})
 
 def addquestion(request):
 	poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:5]
-	return render(request, 'addquestion.html',{'poptags':poptags, 'poptags':poptags})
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+	return render(request, 'addquestion.html', {'poptags':poptags, 'poptags':poptags})
 
 def params(request):
 	if request.method=='POST':

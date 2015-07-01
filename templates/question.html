@@ -28,21 +28,21 @@
 	</div>
 </div>	
 
-{% for i in "abc" %}
+{% for answer in answers %}
 <div class="answer row-fluid">
 	<div class="span2">
 		<img class="question_img" src="http://lorempixel.com/110/110/" style="margin-bottom:5px">
 		<div>
 			<p align="middle">
 				<button class="btn btn-small btn-danger" type="button"><i class="icon-arrow-down icon-white"></i></button>
-				<nobr>5</nobr>
+				<nobr>{{answer.rating}}</nobr>
 				<button class="btn btn-small btn-success" type="button"><i class="icon-arrow-up icon-white"></i></button> 						
 			</p>
 		</div>
 	</div>
 
 	<div class="span6">
-			<p class="answer_text ordinary_text">Налей коту валерьянки и мой теплой водой под душем.</p>
+			<p class="answer_text ordinary_text">{{answer.text}}</p>
 			<label class="checkbox">
    				 <input type="checkbox"> Correct
  			</label>
@@ -63,13 +63,13 @@
 
 <div class="pagination" id="pager">
 	<ul  align="left">
-   		 <li><a href="#prev">Prev</a></li>
-   		 <li  class="disabled"><a href="#1">1</a></li>
-   		 <li><a href="#2">2</a></li>
-  		 <li><a href="#3">3</a></li>
-   		 <li class="disabled"><a href="#..." >...</a></li>
-   		 <li><a href="#5">5</a></li>
-   		 <li><a href="#next">Next</a></li>
+			{% if answers.has_previous %}
+				<li><a href="?q={{q}}&page={{ answers.previous_page_number }}">Prev</a></li>
+			{% endif %}
+				<li><a href="?q={{q}}&page={{answers.number}}">{{ answers.number }}</a></li>
+			{% if answers.has_next %}
+		            <li><a href="?q={{q}}&page={{ answers.next_page_number }}">Next</a><li>
+		        {% endif %}
  	</ul>
 </div>
 {% endblock %}

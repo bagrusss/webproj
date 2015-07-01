@@ -36,13 +36,14 @@
 				{% endfor %}
 	<div class="pagination" id="pager">
   		<ul  align="left">
-   			 <li><a href="#prev">Prev</a></li>
-   			 <li  class="disabled"><a href="#1">1</a></li>
-   			 <li><a href="#2">2</a></li>
-  			 <li><a href="#3">3</a></li>
-   			 <li class="disabled"><a href="#..." >...</a></li>
-   			 <li><a href="#5">5</a></li>
-   			 <li><a href="#next">Next</a></li>
+			{% if questions.has_previous%}
+				<li><a href="?a={{a}}&page={{ questions.previous_page_number }}">Prev</a></li>
+			{% endif%}
+				<li><a href="?a={{a}}&page={{questions.number}}">{{ questions.number }}</a></li>
+
+			{% if questions.has_next %}
+		            <li><a href="?a={{a}}&page={{ questions.next_page_number }}">Next</a><li>
+		        {% endif %}
  		</ul>
 	</div>
 {% endblock %}
