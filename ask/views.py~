@@ -23,7 +23,7 @@ actions=frozenset({'new','pop','tag'})
 def index(request):
 	a=request.GET.get('a','new')
 	if a not in actions:
-	   a='new'
+	   raise Http404
 	questions_list=0;
 	if a=='new':
            questions_list = Question.objects.new()

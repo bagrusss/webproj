@@ -13,7 +13,7 @@ from django.http import Http404
 
 import  datetime
 
-authors=7
+authors=5
 
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
