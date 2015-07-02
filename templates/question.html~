@@ -56,7 +56,7 @@
 </div>
 {% endfor %}
 {% if user.is_authenticated %}
-<div class="answer_area">
+<div class="row-fluid answer_area">
 	<textarea rows="4" class="span12" id="answer_area"></textarea>
 	<div class="control-group">
     	    <div class="controls">

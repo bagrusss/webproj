@@ -22,7 +22,7 @@ class QuestionManager(models.Manager):
 	return self.get_queryset().filter(tag=Tag.objects.filter(text=tag))
 
 class Question(models.Model):
-   title = models.CharField(max_length=200) 
+   title = models.CharField(max_length=100) 
    text = models.TextField() 
    author = models.ForeignKey(User) 
    created = models.DateTimeField(default=datetime.datetime.now) 
@@ -49,7 +49,7 @@ class TagManager(models.Manager):
 
 class Tag(models.Model):
    rating = models.IntegerField(default=0)
-   text = models.CharField(max_length=20) 
+   text = models.CharField(max_length=15) 
    #creator = models.ForeignKey(User)
    question = models.ManyToManyField(Question)
    objects = TagManager()

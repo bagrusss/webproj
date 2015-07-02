@@ -10,10 +10,11 @@ from ask.models import *
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 import  datetime
 
-authors=7
+authors=5
 
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
@@ -90,7 +91,9 @@ def question(request):
 	   q_id=1
 	except TypeError:
 	   q_id=1
-	question = Question.objects.get(id=q_id)
+	try:
+	   question = Question.objects.get(id=q_id)
+	except ObjectDoesNotExist:
 	answers_list=question.answer_set.all()
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)

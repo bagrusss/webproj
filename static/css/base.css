@@ -77,6 +77,11 @@ body{
  	visibility:visible; 
 }
 
+#logo_img{
+	 max-height:40px;
+	 max-width:40px;
+}
+
 .form-control{
 	min-width:280px;
 }
@@ -118,6 +123,29 @@ body{
 	min-height:105px; 
 }
 
+.q_text{
+	min-height:110px; 
+}
+
+.answer_area{
+	margin-left:10px;
+	margin-top:2%;
+	max-height:200px;
+}
+@media (min-width: 320px){
+    .span12 {
+        width: 300px;
+    }
+}
+
+input[type=checkbox] {
+  /* All browsers except webkit*/
+  transform: scale(2);
+
+  /* Webkit browsers*/
+  -webkit-transform: scale(2);
+}
+
 .question_title{
 	font-family: quake;
 	font-size: 130%;
@@ -136,13 +164,25 @@ body{
 	width:100%;
 }
 .question_img {
-	margin-left: 5px;
-	margin-top: 5px;
-	border-radius: 50%;
+	margin: 5px;
+	width:140px;
+	height:140px
+	border-radius:50px;
+}
+
+.answer_img {
+	margin: 5px;
+	width:90px;
+	height:90px
+	border-radius:15%;
 }
 
 .question h5{
 	margin-top: 5px;
+}
+
+.vote_bar{
+	margin:4px
 }
 
 #qmenus{

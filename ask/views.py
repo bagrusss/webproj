@@ -10,6 +10,7 @@ from ask.models import *
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 import  datetime
 
@@ -90,7 +91,10 @@ def question(request):
 	   q_id=1
 	except TypeError:
 	   q_id=1
-	question = Question.objects.get(id=q_id)
+	try:
+	   question = Question.objects.get(id=q_id)
+	except ObjectDoesNotExist:
+	   raise Http404
 	answers_list=question.answer_set.all()
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
