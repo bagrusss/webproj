@@ -132,10 +132,12 @@ a{
 	min-height:110px; 
 }
 
-.answer_area{
-	margin-left:10px;
+#answer_area{
+	margin-left:2%;
 	margin-top:2%;
-	max-height:200px;
+	max-height:250px;
+	width:98%;
+	resize: none;
 }
 @media (min-width: 320px){
     .span12 {
