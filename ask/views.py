@@ -15,6 +15,8 @@ from django.core.exceptions import ObjectDoesNotExist
 import  datetime
 
 authors=5
+uname='username'
+passw='password'
 
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
@@ -30,8 +32,8 @@ def signin(request):
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	if request.POST:
 	   redirect = "/"
-	   username=request.POST['username']
-	   password=request.POST['password']
+	   username=request.POST[uname]
+	   password=request.POST[passw]
 	   user = auth.authenticate(username=username, password=password)
 	   if user is not None and user.is_active:
               auth.login(request, user)
@@ -104,14 +106,6 @@ def question(request):
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
 	page = request.GET.get('page', 1)
-	'''paginator=Paginator(answers_list, 2)
-	answers=0
-	try:
-	   answers=paginator.page(page)
-	except PageNotAnInteger:
-	   answers=paginator.page(1)
-	except EmptyPage:
-	   raise Http404 #answers=paginator.page(paginator.num_pages)'''
 	answers=getListFromPaginator(answers_list, page, 2)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	return render(request, 'question.html', {'question':question, 

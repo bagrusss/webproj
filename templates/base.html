@@ -15,7 +15,7 @@
 	  <div class="navbar navbar-inverse" >
   		<div class="navbar-inner">
   		  <div class="container" align="center" >
-     			 <a class="brand tags" href="/" id="title_home"><img src="/img/1.jpg" id="logo_img"> ASK BAGRUSSS</a>
+     			 <a class="brand tags" href="/" id="title_home"><img src="/uploads/cat1.jpg" id="logo_img"> ASK BAGRUSSS</a>
     			 <div id="head"> 
      			   <form class="navbar-search pull-left">
   			     <input type="text" class="search-query" placeholder="Найти">
@@ -30,8 +30,9 @@
            <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
            <img src="/uploads/{{ user.profile.image }}" class="img-user" width="30" height="30"><span id="user">{{ user.username }}</span> <b class="caret"></b></a>
            <ul class="dropdown-menu">   
-	      <li   class="{% if user.profile.rating > 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Rating {{user.profile.rating}}</li>        
-              <li><a href="{% url 'logout_v' %}?next=/"><i class="fa fa-sign-out"></i>Logout</a></li>
+	      	<li   class="{% if user.profile.rating > 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Rating {{user.profile.rating}}</li>
+		<li><a href="/"><i class="fa fa-sign-out"></i class="icon-plus">Settings</a></li>        
+              	<li><a href="{% url 'logout_v' %}?next=/"><i class="fa fa-sign-out "></i>Logout</a></li>
            </ul>
         </li>
       </ul>

@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 import datetime
 
 uploads = "uploads"
+default_photo="/user.png"
 
 class Profile(models.Model):
    user=models.OneToOneField(User)
    rating=models.IntegerField(default=0)
-   image = models.ImageField(upload_to = uploads, default = "/user.png")
+   image = models.ImageField(upload_to = uploads, default = default_photo)
    def __unicode__(self):
 	return str(self.rating)
 
