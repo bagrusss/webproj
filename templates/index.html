@@ -22,7 +22,7 @@
 					</div>
 					<div class="span9">
 						<h5 class="question_title"><a href="/question?q={{q.id}}">{{q.title}}</a></h5>
-						<p class="ordinary_text">{{q.text}}</p>					
+						<p class="ordinary_text q_text">{{q.text}}</p>					
 						<span class="qtags">
 						   Tags: 
 						   {% for t in q.tag_set.all %}
@@ -38,7 +38,7 @@
 			{% if questions.has_previous%}
 				<li><a href="?a={{a}}&page={{ questions.previous_page_number }}">-</a></li>
 			{% endif%}
-				<li><a href="?a={{a}}&page={{questions.number}}">{{ questions.number }}</a></li>
+				<li class="disabled"><a>{{ questions.number }}</a></li>
 
 			{% if questions.has_next %}
 		            <li><a href="?a={{a}}&page={{ questions.next_page_number }}">+</a><li>

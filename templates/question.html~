@@ -3,7 +3,7 @@
 
 <div class="question row-fluid">
 	<div class="span2">
-		<img class="question_img img-rounded" src="http://lorempixel.com/140/140/">
+		<img class="question_img img-rounded" src="/uploads/{{question.author.profile.image}}">
 		<div>
 			<p align="middle">
 			  <span>{{question.author}}</span>
@@ -56,7 +56,7 @@
 </div>
 {% endfor %}
 {% if user.is_authenticated %}
-<div class="row-fluid answer_area">
+<div class="answer_area">
 	<textarea rows="4" class="span12" id="answer_area"></textarea>
 	<div class="control-group">
     	    <div class="controls">
@@ -65,13 +65,12 @@
   	</div>
 </div>
 {% endif %}
-
 <div class="pagination" id="pager">
 	<ul  align="left">
 			{% if answers.has_previous %}
 				<li><a href="?q={{q}}&page={{ answers.previous_page_number }}">-</a></li>
 			{% endif %}
-				<li><a href="?q={{q}}&page={{answers.number}}">{{ answers.number }}</a></li>
+				<li class="disabled"><a>{{ answers.number }}</a></li>
 			{% if answers.has_next %}
 		            <li><a href="?q={{q}}&page={{ answers.next_page_number }}">+</a><li>
 		        {% endif %}

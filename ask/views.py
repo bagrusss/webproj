@@ -19,39 +19,6 @@ authors=5
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
 
-actions=frozenset({'new','pop','tag'})
-
-def index(request):
-	a=request.GET.get('a','new')
-	if a not in actions:
-	   raise Http404
-	questions_list=0;
-	if a=='new':
-           questions_list = Question.objects.new()
-	   title='New Questions'
-	if a=='pop':
-	   questions_list =  Question.objects.popular()
-	   title='Popular Questions'
-	if a=='tag':
-	   tag=request.GET.get('tag','java')
-	   title = 'Questions for tag "'+tag+'"'
-	   questions_list = Question.objects.get_questions_by_tag(tag)
-	page = request.GET.get('page',1)
-	paginator=Paginator(questions_list, 2)
-	try:
-	   questions=paginator.page(page)
-	except PageNotAnInteger:
-	   questions=paginator.page(1)
-	except EmptyPage:
-	   raise Http404 #questions=paginator.page(paginator.num_pages)
-	
-        poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
-        return render(request, 'index.html', {	'questions':questions, 
-						'title':title, 
-						'poptags':poptags, 
-						'popauthors':popauthors,
-						'a':a})
 
 def signup(request):
 	poptags = get_popular_tags(10)
@@ -82,6 +49,44 @@ def logout_v(request, page=1):
 	logout(request)
 	return HttpResponseRedirect("/")
 
+def getListFromPaginator(objlist, page, count):
+	paginator=Paginator(objlist, count)
+	objects=0
+	try:
+	   objects=paginator.page(page)
+	except PageNotAnInteger:
+	   objects=paginator.page(1)
+	except EmptyPage:
+	   raise Http404 #answers=paginator.page(paginator.num_pages)
+	return objects
+
+actions=frozenset({'new','pop','tag'})
+
+def index(request):
+	a=request.GET.get('a','new')
+	if a not in actions:
+	   raise Http404
+	questions_list=0;
+	if a=='new':
+           questions_list = Question.objects.new()
+	   title='New Questions'
+	if a=='pop':
+	   questions_list =  Question.objects.popular()
+	   title='Popular Questions'
+	if a=='tag':
+	   tag=request.GET.get('tag','java')
+	   title = 'Questions for tag "'+tag+'"'
+	   questions_list = Question.objects.get_questions_by_tag(tag)
+	page = request.GET.get('page',1)
+	questions=getListFromPaginator(questions_list, page, 2)	
+        poptags = get_popular_tags(10)
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+        return render(request, 'index.html', {	'questions':questions, 
+						'title':title, 
+						'poptags':poptags, 
+						'popauthors':popauthors,
+						'a':a})
+
 def question(request):
 	try:
 	   q_id=int(request.GET.get('q'))
@@ -99,14 +104,15 @@ def question(request):
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
 	page = request.GET.get('page', 1)
-	paginator=Paginator(answers_list, 2)
+	'''paginator=Paginator(answers_list, 2)
 	answers=0
 	try:
 	   answers=paginator.page(page)
 	except PageNotAnInteger:
 	   answers=paginator.page(1)
 	except EmptyPage:
-	   raise Http404 #answers=paginator.page(paginator.num_pages)
+	   raise Http404 #answers=paginator.page(paginator.num_pages)'''
+	answers=getListFromPaginator(answers_list, page, 2)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	return render(request, 'question.html', {'question':question, 
 						 'tags':tags, 
@@ -119,8 +125,8 @@ def question(request):
 def addquestion(request):
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
-	return render(request, 'addquestion.html', {'poptags':poptags, 'poptags':poptags})
-
+	return render(request, 'addquestion.html', {'poptags':poptags, 'popauthors':popauthors})
+'''
 def params(request):
 	if request.method=='POST':
 	   req = request.POST
@@ -130,4 +136,4 @@ def params(request):
 	res='hello\n'
 	for key in keys:
 	   res+='\n'+key+'='+req[key]
-	return render(request, 'params.html',{'params':res})
+	return render(request, 'params.html',{'params':res})'''
