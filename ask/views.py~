@@ -23,17 +23,21 @@ def get_popular_tags(end):
 
 
 def signup(request):
+		if request.user.is_authenticated():
+           return HttpResponseRedirect("/")
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	return render(request, 'signup.html', {'poptags':poptags, 'popauthors':popauthors})
 
 def signin(request):
+	if request.user.is_authenticated():
+           return HttpResponseRedirect("/")
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	if request.POST:
 	   redirect = "/"
-	   username=request.POST['username']
-	   password=request.POST['password']
+	   username=request.POST[uname]
+	   password=request.POST[passw]
 	   user = auth.authenticate(username=username, password=password)
 	   if user is not None and user.is_active:
               auth.login(request, user)

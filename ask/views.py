@@ -23,11 +23,15 @@ def get_popular_tags(end):
 
 
 def signup(request):
+	if request.user.is_authenticated():
+           return HttpResponseRedirect("/")
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	return render(request, 'signup.html', {'poptags':poptags, 'popauthors':popauthors})
 
 def signin(request):
+	if request.user.is_authenticated():
+           return HttpResponseRedirect("/")
 	poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
 	if request.POST:
