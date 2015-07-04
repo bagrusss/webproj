@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
-uploads = "uploads"
+uploads = ""
 default_photo="/user.png"
 
 class Profile(models.Model):

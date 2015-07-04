@@ -28,9 +28,9 @@
       <ul class="nav navbar-nav navbar-right" style="float:right;">
         <li class="dropdown">
            <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
-           <img src="/uploads/{{ user.profile.image }}" class="img-user" width="30" height="30"><span id="user">{{ user.username }}</span> <b class="caret"></b></a>
+           <img src="/uploads/{{ user.profile.image }}" class="img-user" width="30" height="30"><span id="user">    {{ user.username }}</span> <b class="caret"></b></a>
            <ul class="dropdown-menu">   
-	      	<li   class="{% if user.profile.rating > 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Rating {{user.profile.rating}}</li>
+	      	<li   class="{% if user.profile.rating >= 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Rating {{user.profile.rating}}</li>
 		<li><a href="/"><i class="fa fa-sign-out"></i class="icon-plus">Settings</a></li>        
               	<li><a href="{% url 'logout_v' %}?next=/"><i class="fa fa-sign-out "></i>Logout</a></li>
            </ul>

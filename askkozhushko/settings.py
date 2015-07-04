@@ -25,6 +25,8 @@ SECRET_KEY = '4%rc7%r6-#hckt(djm%@129kyd=!8sjx7lid^_*!#rh2j-@g#_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_URL='/signin'
+
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
@@ -111,3 +113,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")

@@ -5,15 +5,15 @@
 {% csrf_token %}
   {% if error %}
     <div class="alert alert-danger" role="alert">Incorrect user! Please try agan!</div>
-  {% endif %}
+  {% endif %}<!-- -->
   <div class="control-group" >
-    <label class="control-label" for="username">Username</label>
+    <label class="control-label controlll" for="username">Username</label>
     <div class="controls">
       <input type="text" id="username" name="username" placeholder="Username" value="{% if username %}{{ username }}{% endif %}">
     </div>
   </div>
   <div class="control-group" >
-    <label class="control-label" for="password"">Password</label>
+    <label class="control-label controlll" for="password"">Password</label>
     <div class="controls">
       <input type="password" name="password" id="password" placeholder="Password">
     </div>
@@ -24,10 +24,10 @@
         <input type="checkbox"> Remember me
       </label>-->
   <div class="control-group">
-      <a href="/signin">Forgot password</a>
+      <!--<a href="/signin">Forgot password</a>-->
       <a href="/signup">Create new</a>
   </div>
-      <button type="submit" class="btn">Sign in</button>
+      <button type="submit" class="btn btn-success">Sign in</button>
     </div>
   </div>
 </form>

@@ -148,6 +148,10 @@ input[type=checkbox] {
   -webkit-transform: scale(2);
 }
 
+.controlll{
+	font-weight: bold;
+}
+
 .question_title{
 	font-family: quake;
 	font-size: 130%;
