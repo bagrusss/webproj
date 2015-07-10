@@ -7,9 +7,9 @@
 			<p align="middle">
 			  <span>{{question.author}}</span>
 			     <div align="middle" class="vote_bar"> 
-				<button class="btn btn-small btn-danger" type="button"><i class="icon-arrow-down icon-white"></i></button>
+				<button class="btn btn-small btn-inverse " type="button"><i class="icon-minus icon-white"></i></button>
 				<nobr>{{question.rating}}</nobr>
-				<button class="btn btn-small btn-success" type="button"><i class="icon-arrow-up icon-white"></i></button> 					
+				<button class="btn btn-small btn-inverse " type="button"><i class="icon-plus icon-white"></i></button> 					
 			     </div>			
 			</p>
 		</div>
@@ -32,9 +32,9 @@
 		<div align="middle">
 			<span>{{answer.author}}</span>
 			<div class="vote_bar">			
-				<button class="btn btn-small btn-danger" type="button"><i class="icon-arrow-down icon-white"></i></button>
+				<button class="btn btn-small btn-inverse" type="button"><i class="icon-minus icon-white"></i></button>
 				<nobr>{{answer.rating}}</nobr>
-				<button class="btn btn-small btn-success" type="button"><i class="icon-arrow-up icon-white"></i></button> 						
+				<button class="btn btn-small btn-inverse" type="button"><i class="icon-plus icon-white"></i></button> 						
 			</div>
 		</div>
 	</div>
@@ -58,7 +58,7 @@
 	<textarea rows="4" class="span12" id="answer_area"></textarea>
 	<div class="control-group">
     	    <div class="controls">
-    	        <button type="submit" class="btn" id="answer_button" value="Answer" style="float:right;">Answer</button>
+    	        <button type="submit" class="btn btn-inverse" id="answer_button" value="Answer" style="float:right;">Ответить</button>
 	    </div>
   	</div>
 </div>

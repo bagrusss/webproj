@@ -15,13 +15,13 @@
 	  <div class="navbar navbar-inverse" >
   		<div class="navbar-inner">
   		  <div class="container" align="center" >
-     			 <a class="brand tags" href="/" id="title_home"><img src="/uploads/cat1.jpg" id="logo_img"> ASK BAGRUSSS</a>
+     			 <a class="brand tags" href="/" id="title_home"><img src="/uploads/stark.jpg" id="logo_img"> ASK BAGRUSSS</a>
     			 <div id="head"> 
      			   <form class="navbar-search pull-left">
   			     <input type="text" class="search-query" placeholder="Найти">
      			   </form> 
      			   <p>
-				<button class="btn btn-small btn-info" type="button" id="ask_btn" onclick="location.href='/addquestion'">ASK!</button>
+				<button class="btn btn-small btn-info" type="button" id="ask_btn" onclick="location.href='/addquestion'">Спросить!</button>
       			  </p>
 			</div>
       {% if user.is_authenticated %}
@@ -30,16 +30,16 @@
            <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
            <img src="/uploads/{{ user.profile.image }}" class="img-user" width="30" height="30"><span id="user">    {{ user.username }}</span> <b class="caret"></b></a>
            <ul class="dropdown-menu">   
-	      	<li   class="{% if user.profile.rating >= 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Rating {{user.profile.rating}}</li>
-		<li><a href="/"><i class="fa fa-sign-out"></i class="icon-plus">Settings</a></li>        
-              	<li><a href="{% url 'logout_v' %}?next=/"><i class="fa fa-sign-out "></i>Logout</a></li>
+	      	<li   class="{% if user.profile.rating >= 0 %} label label-success {% else %} label label-important {% endif %}>"</i>Рейтинг {{user.profile.rating}}</li>
+		<li><a href="/"><i class="fa fa-sign-out"></i class="icon-plus">Настройки</a></li>        
+              	<li><a href="{% url 'logout_v' %}?next=/"><i class="fa fa-sign-out "></i>Выйти</a></li>
            </ul>
         </li>
       </ul>
         {% else %}
       <ul class="nav navbar-nav navbar-right" style="float:right;">
-	  <button class="btn btn-small btn-success" type="button" id="sign_in_btn" onclick="location.href='/signin'">Sign in</button>
-  	 <button class="btn btn-small btn-primary" type="button" id="sign_up_btn" onclick="location.href='/signup'">Sign up</button>
+	  <button class="btn btn-small btn-success" type="button" id="sign_in_btn" onclick="location.href='/signin?next={{ request.get_full_path }}'">Войти</button>
+  	 <button class="btn btn-small btn-primary" type="button" id="sign_up_btn" onclick="location.href='/signup?next={{ request.get_full_path }}'">Зарегистрироваться</button>
       </ul>
         {% endif %}
   	  </div>

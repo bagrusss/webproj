@@ -140,6 +140,10 @@ a{
 	resize: none;
 }
 
+#question_area{
+	resize: none;
+}
+
 input[type=checkbox] {
   /* All browsers except webkit*/
   transform: scale(2);

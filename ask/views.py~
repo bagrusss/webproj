@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-#from ask.models import *
 from ask.forms import *
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
 
 import  datetime
 
@@ -22,32 +22,29 @@ passw='password'
 def get_popular_tags(end):
     return Tag.objects.popular()[:end]
 
-
-
-
 def signin(request):
 	if request.user.is_authenticated():
-           return HttpResponseRedirect("/")
+           return HttpResponseRedirect('/')
 	poptags = get_popular_tags(10)
-	popauthors = Profile.objects.get_queryset().order_by('-rating')[:authors]
-        redirect = request.GET.get('next', request.META.HTTP_REFERER)	
+	next=request.GET.get('next')
+	popauthors = Profile.objects.get_queryset().order_by('-rating')[:authors]	
 	if request.POST:
 	   username=request.POST[uname]
 	   password=request.POST[passw]
 	   user = auth.authenticate(username=username, password=password)
 	   if user is not None and user.is_active:
               auth.login(request, user)
-              return HttpResponseRedirect(redirect)
+              return HttpResponseRedirect(next)
 	   else:
-            return render(request, 'signin.html', {
+              return render(request, 'signin.html', {
                 'poptags': poptags,
                 'username': username,
                 'error': 1,
                 'redirect': redirect
-            })
-	return render(request, 'signin.html', {'poptags':poptags,
+            	})
+	return render(request, 'signin.html', {'poptags': poptags,
 						'popauthors':popauthors,
-						'redirect': redirect})
+						'next': next})
 
 def signup(request):
 	if request.user.is_authenticated():
@@ -70,7 +67,7 @@ def signup(request):
 		   if request.FILES:
 		      p.image = request.FILES['image']
 		   p.save()
-		   return HttpResponseRedirect("/")
+		   return HttpResponseRedirect(request.GET.get('next','/'))
 		else:
 		   form._errors["repeat"] = form.error_class(["Please enter password twice"])
 		   form._errors["password"] = form.error_class(["Please enter password twice"])
@@ -78,10 +75,43 @@ def signup(request):
 						'popauthors':popauthors, 
 						'form':form})
 
+@login_required
+def addquestion(request):
+	poptags = get_popular_tags(10)
+	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+	form=AddQuestionForm()
+	if request.user.is_authenticated():
+	   if request.POST:
+	      form = AddQuestionForm(request.POST)
+	      if form.is_valid():
+		 title = form.cleaned_data['title']
+		 text = form.cleaned_data['text']
+		 tags = form.cleaned_data['tags'].split(',')
+		 author=request.user
+		 q=Question.objects.create(author=author, title=title, text=text)
+		 for t in tags:
+		    if t.strip() != "":
+		       try:
+		         tag=Tag.objects.get(text=t.strip())
+			 tag.rating+=1
+			 tag.save()
+		       except Tag.DoesNotExist:
+			 tag=Tag.objects.create(text=t.strip())
+		       q.tag_set.add(tag)
+		 q.save()
+		 return HttpResponseRedirect('/question?q='+str(q.id))
+	else:
+	   return HttpResponseRedirect('/signin')
+	return render(request, 'addquestion.html', {'poptags':poptags, 
+						    'popauthors':popauthors,
+						    'form':form})
+
+def settings(request):
+	return HttpResponseRedirect('/')
 
 def logout_v(request, page=1):
 	logout(request)
-	return HttpResponseRedirect("/")
+	return HttpResponseRedirect('/')
 
 def getListFromPaginator(objlist, page, count):
 	paginator=Paginator(objlist, count)
@@ -98,6 +128,7 @@ actions=frozenset({'new','pop','tag'})
 
 def index(request):
 	a=request.GET.get('a','new')
+	tag=0
 	if a not in actions:
 	   raise Http404
 	questions_list=0;
@@ -119,7 +150,8 @@ def index(request):
 						'title':title, 
 						'poptags':poptags, 
 						'popauthors':popauthors,
-						'a':a})
+						'a':a,
+						'tag':tag})
 
 def question(request):
 	try:
@@ -146,13 +178,10 @@ def question(request):
 						 'answers':answers, 
 						 'popauthors':popauthors, 
 						 'page':page,
-						 'q':q_id})
+						 'q':q_id,
+						 'is_author':is_author})
 
-@login_required
-def addquestion(request):
-	poptags = get_popular_tags(10)
-	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
-	return render(request, 'addquestion.html', {'poptags':poptags, 'popauthors':popauthors})
+
 '''
 def params(request):
 	if request.method=='POST':

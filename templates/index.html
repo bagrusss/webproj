@@ -3,8 +3,8 @@
 		<div class="row-fluid" id="qmenus">
 			<h1 class="custom_title" id="header">{{title}}
 			<span>
-			  <a href="?a=pop" class="btn btn-inverse btn-large" id="topButton">Popular</a>
-			  <a href="?a=new" class="btn btn-inverse btn-large" id="newButton">New</a>
+			  <a href="?a=pop" class="btn btn-inverse btn-large" id="topButton">Лучшие</a>
+			  <a href="?a=new" class="btn btn-inverse btn-large" id="newButton">Новые</a>
 			</span></h1>
 		</div>
 				{% for q in questions %}
@@ -14,9 +14,9 @@
 						<span>{{q.author}}</span>
 						<div class="vote_bar" >
 							   <span>
-  								<button class="btn btn-mini btn-danger vote_down" type="button"><i class="icon-minus icon-white"></i></button>
+  								<button class="btn btn-mini btn-inverse  vote_down" type="button"><i class="icon-minus icon-white"></i></button>
 								<nobr>{{q.rating}}</nobr>
-								<button class="btn btn-mini btn-success vote_up" type="button"><i class="icon-plus icon-white"></i></button>
+								<button class="btn btn-mini btn-inverse  vote_up" type="button"><i class="icon-plus icon-white"></i></button>
 							   </span> 
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 				<li class="disabled"><a>{{ questions.number }}</a></li>
 
 			{% if questions.has_next %}
-		            <li><a href="?a={{a}}&page={{ questions.next_page_number }}">+</a><li>
+		            <li><a href="?a={{a}}{% if tag %}&tag={{tag}}{% endif %}&page={{ questions.next_page_number }}">+</a><li>
 		        {% endif %}
  		</ul>
 	</div>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {%  block main %}
-<h1 class="custom_title" align="middle" id="header">Registration</h1>
+<h1 class="custom_title" align="middle" id="header">Sign up</h1>
 <div>
 <form class="form-horizontal" method="post" action="/signup" enctype="multipart/form-data">
    {% csrf_token %}
@@ -16,7 +16,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn btn-primary" id="register_button" value="Create account">Sign up</button>
+      <button type="submit" class="btn btn-primary" id="register_button" value="Sign up">Регистрация</button>
     </div>
   </div>
 </form>
