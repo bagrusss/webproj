@@ -2,10 +2,10 @@
 {% block main %}
 		<div class="row-fluid" id="qmenus">
 			<h1 class="custom_title" id="header">{{title}}
-			<span>
+			<div style="padding-top:1%">
 			  <a href="?a=pop" class="btn btn-inverse btn-large" id="topButton">Лучшие</a>
 			  <a href="?a=new" class="btn btn-inverse btn-large" id="newButton">Новые</a>
-			</span></h1>
+			</div></h1>
 		</div>
 				{% for q in questions %}
 				<div class="question row-fluid">
@@ -36,7 +36,7 @@
 	<div class="pagination" id="pager">
   		<ul  align="left">
 			{% if questions.has_previous%}
-				<li><a href="?a={{a}}&page={{ questions.previous_page_number }}">-</a></li>
+				<li><a href="?a={{a}}{% if tag %}&tag={{tag}}{% endif %}&page={{ questions.previous_page_number }}">-</a></li>
 			{% endif%}
 				<li class="disabled"><a>{{ questions.number }}</a></li>
 

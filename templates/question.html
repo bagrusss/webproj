@@ -55,12 +55,21 @@
 {% endfor %}
 {% if user.is_authenticated %}
 <div>
-	<textarea rows="4" class="span12" id="answer_area"></textarea>
+    <form method="post" action="/question">
+    {% csrf_token %}
+	   {% for f in form.visible_fields %}
+ 	    <div class="control-group {% if f.errors %}error{% endif %}">
+   	         <div class="controls">
+		    {{f}}
+   	         </div>
+ 	    </div>	
+   {% endfor %}
 	<div class="control-group">
     	    <div class="controls">
     	        <button type="submit" class="btn btn-inverse" id="answer_button" value="Answer" style="float:right;">Ответить</button>
 	    </div>
   	</div>
+    </form>
 </div>
 {% endif %}
 <div class="pagination" id="pager">

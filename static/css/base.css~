@@ -1,6 +1,6 @@
 @font-face {
     font-family: gothic !important; 
-     src:  url('../fonts/gothic.ttf'); 
+     src:  url('../fonts/gothics.ttf'); 
 }
 
 @font-face {
@@ -88,6 +88,7 @@ body{
 
 .qtags{
 	float:left;
+	
 }
 
 
@@ -137,6 +138,10 @@ a{
 	margin-top:2%;
 	max-height:250px;
 	width:98%;
+	resize: none;
+}
+
+#question_area{
 	resize: none;
 }
 
@@ -234,6 +239,7 @@ label{
 
 .tags{
 	font-family: CheapPizza, cheap;
+	padding-left:25px;
 }
 
 /* он же input*/
@@ -245,6 +251,7 @@ label{
 .authors{
 	font-family: DesdaC, desda;
 	font-size: large;
+	padding-left:25px;
 }
 
 p{

@@ -11,7 +11,7 @@ from ask.forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
-from django.db import IntegrityError
+from django.db.utils import IntegrityError
 
 import  datetime
 
@@ -134,16 +134,16 @@ def index(request):
 	questions_list=0;
 	if a=='new':
            questions_list = Question.objects.new()
-	   title='New Questions'
+	   title=u'Новые вопросы'
 	if a=='pop':
 	   questions_list =  Question.objects.popular()
-	   title='Popular Questions'
+	   title=u'Лучшие вопросы'
 	if a=='tag':
-	   tag=request.GET.get('tag','java')
-	   title = 'Questions for tag "'+tag+'"'
+	   tag=request.GET.get('tag','js')
+	   title = u'Вопросы с тэгом "'+tag+'"'
 	   questions_list = Question.objects.get_questions_by_tag(tag)
 	page = request.GET.get('page',1)
-	questions=getListFromPaginator(questions_list, page, 2)	
+	questions=getListFromPaginator(questions_list, page, 20)	
         poptags = get_popular_tags(10)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
         return render(request, 'index.html', {	'questions':questions, 
@@ -170,15 +170,26 @@ def question(request):
 	tags = Tag.objects.tags_for_questions(q_id)
 	poptags = get_popular_tags(10)
 	page = request.GET.get('page', 1)
-	answers=getListFromPaginator(answers_list, page, 2)
+	answers=getListFromPaginator(answers_list, page, 20)
 	popauthors=Profile.objects.get_queryset().order_by('-rating')[:authors]
+	form=AnswerForm()
+	if request.user.is_authenticated():
+	   if request.POST:
+		form = AnswerForm(request.POST)
+		if form.is_valid():
+		   text=form.cleaned_data['text']
+		   author=request.user
+		   answ=Answer.objects.create(text=text, question=question, author=author)
+		   answ.save()
+		   return HttpResponseRedirect('/question?q='+q_id)
 	return render(request, 'question.html', {'question':question, 
 						 'tags':tags, 
 						 'poptags':poptags, 
 						 'answers':answers, 
 						 'popauthors':popauthors, 
 						 'page':page,
-						 'q':q_id })
+						 'q':q_id,
+						 'form': form })
 
 
 '''

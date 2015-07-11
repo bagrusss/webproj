@@ -53,14 +53,14 @@
 		</div>
  		<div class="span3" id="right">
 		   <div class="row-fluid">
-			<h3 class="custom_title">Popular tags</h3>
-			<ul class="tags">
+			<h3 class="custom_title">Популярные тэги</h3>
+			<ul class="tags" >
 			   {% for tag in poptags%}
 				<a href="/?a=tag&tag={{tag}}"><li>{{tag}}</li></a>
 			   {% endfor %}		
 			</ul>
 			<hr>
-			<h3 class="custom_title">Popular authors</h3>
+			<h3 class="custom_title">Лучшие авторы</h3>
 			<ul class="authors">
 			   {% for author in popauthors %}
 				<a href="/"><li>{{author.user.username}}</li></a>

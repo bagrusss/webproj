@@ -88,6 +88,7 @@ body{
 
 .qtags{
 	float:left;
+	
 }
 
 
@@ -238,6 +239,7 @@ label{
 
 .tags{
 	font-family: CheapPizza, cheap;
+	padding-left:25px;
 }
 
 /* он же input*/
@@ -249,6 +251,7 @@ label{
 .authors{
 	font-family: DesdaC, desda;
 	font-size: large;
+	padding-left:25px;
 }
 
 p{
