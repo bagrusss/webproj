@@ -41,7 +41,7 @@
 	<div class="span9">
 			<p class="answer_text ordinary_text">{{answer.text}}</p>
 			<span class="qdate">{{answer.created}}</span>
-			{% if answer.author == user %}
+			{% if question.author == user %}
 			<label class="checkbox">
    				 <input type="checkbox">
  			</label>
