@@ -36,10 +36,10 @@
            </ul>
         </li>
       </ul>
-        {% else %}
+      {% else %}
       <ul class="nav navbar-nav navbar-right" style="float:right;">
-	  <button class="btn btn-small btn-success" type="button" id="sign_in_btn" onclick="location.href='/signin?next={{ request.get_full_path }}'">Войти</button>
-  	 <button class="btn btn-small btn-primary" type="button" id="sign_up_btn" onclick="location.href='/signup?next={{ request.get_full_path }}'">Зарегистрироваться</button>
+	 <button class="btn btn-small btn-success" type="button" id="sign_in_btn" onclick="location.href='/signin?next={{ request.path }}'">Войти</button>
+  	 <button class="btn btn-small btn-primary" type="button" id="sign_up_btn" onclick="location.href='/signup?next={{ request.path }}'">Зарегистрироваться</button>
       </ul>
         {% endif %}
   	  </div>

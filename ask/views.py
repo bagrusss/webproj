@@ -109,9 +109,9 @@ def addquestion(request):
 def settings(request):
 	return HttpResponseRedirect('/')
 
-def logout_v(request, page=1):
+def logout_v(request, page='/'):
 	logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(page)
 
 def getListFromPaginator(objlist, page, count):
 	paginator=Paginator(objlist, count)
@@ -155,7 +155,7 @@ def index(request):
 
 def question(request):
 	try:
-	   q_id=int(request.GET.get('q'))
+	   q_id=long(request.GET.get('q'))
 	except SyntaxError:
 	   q_id=1
 	except ValueError:
@@ -167,7 +167,7 @@ def question(request):
 	except ObjectDoesNotExist:
 	   raise Http404
 	answers_list=question.answer_set.all()
-	tags = Tag.objects.tags_for_questions(q_id)
+	tags = question.tag_set.all()
 	poptags = get_popular_tags(10)
 	page = request.GET.get('page', 1)
 	answers=getListFromPaginator(answers_list, page, 20)
@@ -181,7 +181,7 @@ def question(request):
 		   author=request.user
 		   answ=Answer.objects.create(text=text, question=question, author=author)
 		   answ.save()
-		   return HttpResponseRedirect('/question?q='+q_id)
+		   return HttpResponseRedirect('/question?q='+str(q_id))
 	return render(request, 'question.html', {'question':question, 
 						 'tags':tags, 
 						 'poptags':poptags, 

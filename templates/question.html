@@ -28,7 +28,7 @@
 {% for answer in answers %}
 <div class="answer row-fluid">
 	<div class="span2" align="middle">
-		<img class="answer_img" src="/uploads/{{answer.author.profile.image}}">
+		<img class="answer_img img-rounded" src="/uploads/{{answer.author.profile.image}}">
 		<div align="middle">
 			<span>{{answer.author}}</span>
 			<div class="vote_bar">			
@@ -55,7 +55,7 @@
 {% endfor %}
 {% if user.is_authenticated %}
 <div>
-    <form method="post" action="/question">
+    <form method="post" action="/question?q={{question.id}}">
     {% csrf_token %}
 	   {% for f in form.visible_fields %}
  	    <div class="control-group {% if f.errors %}error{% endif %}">

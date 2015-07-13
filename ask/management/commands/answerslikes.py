@@ -19,7 +19,7 @@ class Command(BaseCommand):
     def generete_answers(self):
 	self.stdout.write("begin generate answers")
 	u=User.objects.all()
-	quest=Question.objects.get(id=1)
+	'''quest=Question.objects.get(id=1)
 	txt_ping=u"Пинг"
 	txt_pong=u"Понг"
 	for i in range(1, 45):
@@ -29,7 +29,7 @@ class Command(BaseCommand):
 		text=txt_pong
 	    ans=Answer.objects.create(question=quest, author=u[random.randint(0, u.count()-1)],
 					   text=text)
-	    ans.save()		
+	    ans.save()	'''	
 	q=Question.objects.all()
 	for i in range (1, answer_count):
 	    text=gen_random_str()

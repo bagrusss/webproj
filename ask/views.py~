@@ -181,7 +181,7 @@ def question(request):
 		   author=request.user
 		   answ=Answer.objects.create(text=text, question=question, author=author)
 		   answ.save()
-		   return HttpResponseRedirect('/question?q=q_id')
+		   return HttpResponseRedirect('/question?q='+q_id)
 	return render(request, 'question.html', {'question':question, 
 						 'tags':tags, 
 						 'poptags':poptags, 
