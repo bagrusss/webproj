@@ -41,10 +41,10 @@ question_third=[u"лом", u"лунопарк", u"тормоза", u"нашес�
 question_quard=[u"в России", u"с помощью отвертки", u"без наличия опыта", u"своими руками", u"дешево и сердито", 
 		u"с минимальными потерями", u"из-за границы", u"под Linux", u"в америкосии", u"в гараже", u"на озере"]
 	
-user_count=10000;
-question_count=100000;
-tags_count=10000;
-answer_count=1000000
+user_count=100;
+question_count=100;
+tags_count=10;
+answer_count=1000
 def randomtext(length):
     return ''.join(random.choice(string.lowercase) for i in range(length))
 

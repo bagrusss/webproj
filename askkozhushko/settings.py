@@ -87,10 +87,8 @@ WSGI_APPLICATION = 'askkozhushko.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'askdbs',
-	'USER':'ask_usr',
-	'PASSWORD':'secretpassword',
     }
 }
 
